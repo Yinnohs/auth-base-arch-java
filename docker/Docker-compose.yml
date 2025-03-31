@@ -1,0 +1,18 @@
+services:
+  postgres:
+    container_name: postgres_auth
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - postgres.env
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+
+volumes:
+  postgres:
