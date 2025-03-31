@@ -7,4 +7,16 @@ CREATE TABLE IF NOT EXISTS users(
     last_update timestamp
 );
 
-create sequence if not exists users_seq increment by 2;
+CREATE TABLE IF NOT EXISTS accounts(
+    id bigint not null primary key,
+    email varchar(255) not null,
+    password varchar(255) not null,
+    refresh_token varchar(255),
+    user_id bigint not null,
+    created_at timestamp,
+    last_update timestamp,
+    constraint fk_user_account foreign key(user_id) references users(id)
+);
+
+create sequence if not exists users_seq increment by 50;
+create sequence if not exists accounts_seq increment by 50;
