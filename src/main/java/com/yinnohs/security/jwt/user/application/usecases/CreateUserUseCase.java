@@ -13,15 +13,9 @@ public class CreateUserUseCase {
     private final UserService userService;
 
     public Long execute (CreateUserRequest request){
-
-        if (!Password.isValidPassword(request.password())){
-            throw new InvalidPasswordException("Password is invalid should have at least 12 characters");
-        }
-
         User userToCreate = User.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastName())
-                .password(new Password(request.password()))
                 .email(new Email(request.email()))
                 .build();
 
