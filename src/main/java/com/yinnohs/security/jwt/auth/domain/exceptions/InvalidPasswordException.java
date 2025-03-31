@@ -1,4 +1,4 @@
-package com.yinnohs.security.jwt.user.domain.exception;
+package com.yinnohs.security.jwt.auth.domain.exceptions;
 
 public class InvalidPasswordException extends RuntimeException {
     public InvalidPasswordException(String message) {

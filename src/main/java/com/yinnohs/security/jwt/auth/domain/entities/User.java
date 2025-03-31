@@ -1,4 +1,4 @@
-package com.yinnohs.security.jwt.user.domain.entities;
+package com.yinnohs.security.jwt.auth.domain.entities;
 
 import com.yinnohs.security.jwt.user.domain.vo.Email;
 import lombok.*;
@@ -15,6 +15,4 @@ public class User {
     private String firstName;
     private String lastName;
     private Email email;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastUpdate;
 }

@@ -2,10 +2,8 @@ package com.yinnohs.security.jwt.user.application.usecases;
 
 import com.yinnohs.security.jwt.user.application.dtos.CreateUserRequest;
 import com.yinnohs.security.jwt.user.domain.entities.User;
-import com.yinnohs.security.jwt.user.domain.exception.InvalidPasswordException;
 import com.yinnohs.security.jwt.user.domain.ports.out.UserService;
 import com.yinnohs.security.jwt.user.domain.vo.Email;
-import com.yinnohs.security.jwt.user.domain.vo.Password;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
