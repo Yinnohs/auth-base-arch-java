@@ -61,7 +61,7 @@ public class JWTServiceImpl {
                 .issuedAt(today)
                 .expiration(expiration)
                 .and()
-                .signWith(keys.publicKey())
+                .signWith(keys.privateKey())
                 .compact();
     }
 

@@ -12,14 +12,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Component
 public class JWTFilter extends OncePerRequestFilter {
 
-    private final String AUTHENTICATION_HEADER = "Authentication";
+    private final String AUTHENTICATION_HEADER = "Authorization";
     private final String BEARER = "Bearer ";
     private final JWTServiceImpl jwtService;
     private final UserDetailsService userDetailsService;
@@ -33,7 +35,8 @@ public class JWTFilter extends OncePerRequestFilter {
         String accountEmail = null;
 
         if (authHeader == null || !authHeader.startsWith(BEARER)){
-            throw new TokenNotFoundException("User not logged in");
+            filterChain.doFilter(request, response);
+            return;
         }
 
         token = authHeader.substring(BEARER.length());

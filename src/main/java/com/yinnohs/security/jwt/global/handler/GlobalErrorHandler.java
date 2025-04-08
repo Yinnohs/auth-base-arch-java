@@ -57,7 +57,7 @@ public class GlobalErrorHandler {
     public ResponseEntity<?> handleTokenNotFoundException(TokenNotFoundException sqlEx){
         var response = new GenericErrorResponse(sqlEx.getMessage(), "Token not found", 401);
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.FORBIDDEN)
                 .body(response);
     }
 }
