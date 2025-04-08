@@ -1,5 +1,6 @@
 package com.yinnohs.security.jwt.global.handler;
 
+import com.yinnohs.security.jwt.auth.domain.exceptions.TokenNotFoundException;
 import com.yinnohs.security.jwt.global.dtos.responses.ErrorResponse;
 import com.yinnohs.security.jwt.global.dtos.responses.GenericErrorResponse;
 import com.yinnohs.security.jwt.auth.domain.exceptions.InvalidEmailException;
@@ -47,6 +48,14 @@ public class GlobalErrorHandler {
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<?> handleSQLException(SQLException sqlEx){
         var response = new GenericErrorResponse(sqlEx.getMessage(), "InternalServerError", 500);
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(response);
+    }
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<?> handleTokenNotFoundException(TokenNotFoundException sqlEx){
+        var response = new GenericErrorResponse(sqlEx.getMessage(), "Token not found", 401);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(response);
