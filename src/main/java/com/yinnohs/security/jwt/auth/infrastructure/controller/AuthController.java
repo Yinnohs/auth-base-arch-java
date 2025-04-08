@@ -19,12 +19,12 @@ public class AuthController {
     private final SignUpUseCase signUpUseCase;
     private final LoginUseCase loginUseCase;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> signup(@RequestBody SignUpRequest request){
         return  ResponseEntity.ok(signUpUseCase.execute(request));
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public  ResponseEntity<?> login(@RequestBody LoginRequest request){
         //TODO: create sue case and add in here
         return ResponseEntity.ok("");

@@ -1,6 +1,6 @@
 package com.yinnohs.security.jwt.auth.infrastructure.configs;
 
-import com.yinnohs.security.jwt.auth.infrastructure.services.UserDetailsAccountService;
+import com.yinnohs.security.jwt.auth.infrastructure.services.UserDetailsAccountServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,7 +32,7 @@ public class SecurityConfig {
     @Value("${argon2.saltLength}")
     private int saltLength;
 
-    private final UserDetailsAccountService userDetailsAccountService;
+    private final UserDetailsAccountServiceImpl userDetailsAccountService;
 
 
     @Bean
@@ -40,8 +41,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->{
-                    request.anyRequest().permitAll();
-                });
+                    request.requestMatchers("/api/v1/auth/*").permitAll()
+                            .anyRequest().authenticated();
+                }).sessionManagement(session->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
 
         return http.build();
     }
