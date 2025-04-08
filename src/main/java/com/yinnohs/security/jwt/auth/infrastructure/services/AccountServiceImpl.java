@@ -1,6 +1,4 @@
 package com.yinnohs.security.jwt.auth.infrastructure.services;
-
-import com.yinnohs.security.jwt.auth.application.dtos.LoginRequest;
 import com.yinnohs.security.jwt.auth.domain.entities.Account;
 import com.yinnohs.security.jwt.auth.domain.exceptions.AccountNotFoundException;
 import com.yinnohs.security.jwt.auth.domain.exceptions.WrongCredentialsException;
@@ -13,6 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,14 +39,21 @@ public class AccountServiceImpl implements AccountService {
         return mapper.modelToDomain(foundAccount);
     }
 
-    public String verifyCredentials(LoginRequest request){
-        var userAuth = new UsernamePasswordAuthenticationToken(request.email(), request.password());
+    public List<String> getTokens(String email, String password){
+        var userAuth = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = authManager.authenticate(userAuth);
 
         if(!authentication.isAuthenticated()){
             throw new WrongCredentialsException("Wrong credentials");
         }
 
-        return "OK"; // should be auth token
+        var foundAccount =  repository.findByEmail(email).orElseThrow(
+                ()-> new AccountNotFoundException("Wrong Credentials")
+        );
+
+        var authToken = jwtService.generateAuthToken(foundAccount); // should be auth token
+        var refreshToken = jwtService.generateRefreshToken(foundAccount);
+
+        return  List.of(authToken, refreshToken);
     }
 }

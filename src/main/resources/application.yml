@@ -31,6 +31,16 @@ management:
     health:
       show-details: always
 
+jwt:
+  auth:
+    expiration: 1800000
+  refresh:
+    expiration: 604800000
+
+rsa:
+  private-key: classpath:certs/private-final-key.pem
+  public-key: classpath:certs/public-key.pem
+
 
 argon2:
   memory: 7168

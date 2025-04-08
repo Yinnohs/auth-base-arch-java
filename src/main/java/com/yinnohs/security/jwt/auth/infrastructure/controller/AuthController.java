@@ -26,7 +26,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public  ResponseEntity<?> login(@RequestBody LoginRequest request){
-        //TODO: create sue case and add in here
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(loginUseCase.execute(request));
     }
 }

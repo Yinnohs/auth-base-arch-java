@@ -1,5 +1,6 @@
 package com.yinnohs.security.jwt.auth.infrastructure.configs;
 
+import com.yinnohs.security.jwt.auth.application.usecases.LoginUseCase;
 import com.yinnohs.security.jwt.auth.application.usecases.SignUpUseCase;
 import com.yinnohs.security.jwt.auth.domain.ports.in.UserPort;
 import com.yinnohs.security.jwt.auth.domain.ports.out.AccountService;
@@ -18,5 +19,10 @@ public class AuthBeanConfiguration {
     @Bean
     public SignUpUseCase signUpUseCase(){
         return new SignUpUseCase(accountService, userPort, passwordService);
+    }
+
+    @Bean
+    public LoginUseCase loginUseCase(){
+        return new LoginUseCase(accountService);
     }
 }

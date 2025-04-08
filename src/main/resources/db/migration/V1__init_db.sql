@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS accounts(
     id bigint not null primary key,
     email varchar(255) not null,
     password varchar(255) not null,
-    refresh_token varchar(255),
+    refresh_token varchar(1000),
     user_id bigint not null,
     created_at timestamp,
     last_update timestamp,
