@@ -1,6 +1,7 @@
 package com.yinnohs.security.jwt.user.infrastructure.configs;
 
 import com.yinnohs.security.jwt.user.application.usecases.CreateUserUseCase;
+import com.yinnohs.security.jwt.user.application.usecases.ExistByEmail;
 import com.yinnohs.security.jwt.user.domain.ports.out.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,5 +16,10 @@ public class UsersBeanConfiguration {
     @Bean
     public CreateUserUseCase createUserUseCase(){
         return  new CreateUserUseCase(userService);
+    }
+
+    @Bean
+    public ExistByEmail existByEmail(){
+        return new ExistByEmail(userService);
     }
 }

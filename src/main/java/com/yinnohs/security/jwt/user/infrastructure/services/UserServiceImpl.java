@@ -15,6 +15,11 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     @Override
+    public Boolean existByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    @Override
     public Long save(User user) {
         var model = mapper.domainToModel(user);
         var savedModel = repository.save(model);
