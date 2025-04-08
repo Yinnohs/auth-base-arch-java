@@ -1,7 +1,6 @@
 package com.yinnohs.security.jwt.user.infrastructure.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

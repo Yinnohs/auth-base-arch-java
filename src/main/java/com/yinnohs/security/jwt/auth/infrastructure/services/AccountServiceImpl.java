@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
     public Long save(Account account) {
         var model = mapper.domainToModel(account);
         var savedModel = repository.save(model);
-        return model.getId();
+        return savedModel.getId();
     }
 
     @Override

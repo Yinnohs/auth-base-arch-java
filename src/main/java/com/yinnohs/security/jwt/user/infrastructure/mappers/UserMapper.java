@@ -2,7 +2,6 @@ package com.yinnohs.security.jwt.user.infrastructure.mappers;
 
 import com.yinnohs.security.jwt.user.domain.entities.User;
 import com.yinnohs.security.jwt.user.domain.vo.Email;
-import com.yinnohs.security.jwt.user.domain.vo.Password;
 import com.yinnohs.security.jwt.user.infrastructure.model.UserModel;
 import org.springframework.stereotype.Component;
 
