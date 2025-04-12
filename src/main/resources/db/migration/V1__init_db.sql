@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS accounts(
     password varchar(255) not null,
     refresh_token varchar(1000),
     user_id bigint not null,
+    role varchar(255) not null,
     created_at timestamp,
     last_update timestamp,
     constraint fk_user_account foreign key(user_id) references users(id)

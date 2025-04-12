@@ -2,6 +2,7 @@ package com.yinnohs.security.jwt.auth.application.usecases;
 
 import com.yinnohs.security.jwt.auth.application.dtos.SignUpRequest;
 import com.yinnohs.security.jwt.auth.domain.entities.Account;
+import com.yinnohs.security.jwt.auth.domain.entities.Role;
 import com.yinnohs.security.jwt.auth.domain.exceptions.InvalidEmailException;
 import com.yinnohs.security.jwt.auth.domain.exceptions.InvalidPasswordException;
 import com.yinnohs.security.jwt.auth.domain.ports.in.UserPort;
@@ -34,6 +35,7 @@ public class SignUpUseCase {
                 .email(new Email(request.email()))
                 .password(new Password(hashPassword))
                 .userId(userId)
+                .role(Role.USER)
                 .build();
         return service.save(accountToSave);
     }

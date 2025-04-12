@@ -17,6 +17,7 @@ public class Account {
     private Password password;
     private String refreshToken;
     private Long userId;
+    private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime lastUpdate;
 

@@ -16,6 +16,7 @@ public class AccountMapper {
                 .password(account.getPassword().getValue())
                 .refreshToken(account.getRefreshToken())
                 .userId(account.getUserId())
+                .role(account.getRole())
                 .build();
     }
 
@@ -26,6 +27,7 @@ public class AccountMapper {
                 .password(new Password(account.getPassword()))
                 .refreshToken(account.getRefreshToken())
                 .userId(account.getUserId())
+                .role(account.getRole())
                 .build();
     }
 
