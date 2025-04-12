@@ -8,7 +8,6 @@ This project follows a modular monolith approach with:
 
 - **Hexagonal Architecture (Ports & Adapters)**: Clear separation between domain logic and external concerns
 - **Screaming Architecture**: Package structure that screams its purpose
-- **Domain-Driven Design (DDD)**: Focus on domain models and business logic
 
 ### Project Structure
 
@@ -108,7 +107,7 @@ mvn test
 
 The API documentation is available at:
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:5052/swagger-ui.html
 ```
 
 ## 🤝 Contributing
