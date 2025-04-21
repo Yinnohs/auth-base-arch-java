@@ -32,6 +32,7 @@ public class AccountModel implements UserDetails {
     @Column(nullable = false)
     private Long userId;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
     @CreatedDate
     private LocalDateTime createdAt;

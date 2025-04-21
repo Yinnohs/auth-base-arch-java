@@ -53,6 +53,13 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->{
                     request.requestMatchers("/api/v1/auth/**").permitAll()
+
+                            // Swagger UI endpoints
+                            .requestMatchers("/swagger-ui/**").permitAll()
+                            .requestMatchers("/swagger-ui.html").permitAll()
+                            .requestMatchers("/v3/api-docs/**").permitAll()
+                            .requestMatchers("/api-docs/**").permitAll()
+
                             //management section
                             .requestMatchers("/api/v1/management/**")
                             .hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
@@ -76,6 +83,7 @@ public class SecurityConfig {
                             .hasAuthority(ADMIN_UPDATE.name())
                             .requestMatchers(HttpMethod.DELETE, "/api/v1/admin/**")
                             .hasAuthority(ADMIN_DELETE.name())
+
 
                             //any request
                             .anyRequest().authenticated();
