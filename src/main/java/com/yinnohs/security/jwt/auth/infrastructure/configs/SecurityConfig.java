@@ -75,7 +75,7 @@ public class SecurityConfig {
                             //admin section
                             .requestMatchers("/api/v1/admin/**")
                             .hasRole(Role.ADMIN.name())
-                            .requestMatchers(HttpMethod.GET, "/api/v1/admin/**")
+                            .requestMatchers(HttpMethod.GET, "/api/v1/admin/**", "/api/v1/users/hc")
                             .hasAuthority(ADMIN_READ.name())
                             .requestMatchers(HttpMethod.POST, "/api/v1/admin/**")
                             .hasAuthority(ADMIN_CREATE.name())
