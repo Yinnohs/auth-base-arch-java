@@ -3,9 +3,9 @@ package com.yinnohs.security.jwt.auth.domain.entities;
 public class SecurityConstants {
     // Role names
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
-    public static final String ROLE_MANAGER = "ROLE_MANAGER";
     public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_INSTALLER = "ROLE_INSTALLER";
+    public static final String ADMIN = "ADMIN";
+    public static final String USER = "USER";
 
     // Permission categories
     public static final String USER_READ = "USER_READ";

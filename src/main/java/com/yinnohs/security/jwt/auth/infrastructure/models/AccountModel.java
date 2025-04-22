@@ -30,8 +30,8 @@ public class AccountModel implements UserDetails {
     private String refreshToken;
     @Column(nullable = false)
     private Long userId;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
     private RoleModel role;
     @CreatedDate
     private LocalDateTime createdAt;

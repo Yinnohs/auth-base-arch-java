@@ -39,7 +39,11 @@ public class SecurityDataInitializer {
                 SecurityConstants.USER_READ,
                 SecurityConstants.USER_CREATE,
                 SecurityConstants.USER_UPDATE,
-                SecurityConstants.USER_DELETE
+                SecurityConstants.USER_DELETE,
+                SecurityConstants.ADMIN_CREATE,
+                SecurityConstants.ADMIN_DELETE,
+                SecurityConstants.ADMIN_READ,
+                SecurityConstants.ADMIN_UPDATE
         );
 
         for (String permissionName : permissionNames) {
@@ -57,16 +61,12 @@ public class SecurityDataInitializer {
     public void initializeRoles() {
         List<String> roleNames = Arrays.asList(
                 SecurityConstants.ROLE_ADMIN,
-                SecurityConstants.ROLE_MANAGER,
-                SecurityConstants.ROLE_USER,
-                SecurityConstants.ROLE_INSTALLER
+                SecurityConstants.ROLE_USER
         );
 
         Map<String, String> roleDescriptions = new HashMap<>();
         roleDescriptions.put(SecurityConstants.ROLE_ADMIN, "Administrator with full access");
-        roleDescriptions.put(SecurityConstants.ROLE_MANAGER, "Manager with elevated access");
         roleDescriptions.put(SecurityConstants.ROLE_USER, "Regular user with limited access");
-        roleDescriptions.put(SecurityConstants.ROLE_INSTALLER, "Solar panel installer");
 
         for (String roleName : roleNames) {
             if (!roleRepository.existsByName(roleName)) {
@@ -87,14 +87,12 @@ public class SecurityDataInitializer {
         // Admin has all permissions
         List<String> allPermissions = Arrays.asList(
                 SecurityConstants.USER_READ, SecurityConstants.USER_CREATE,
-                SecurityConstants.USER_UPDATE, SecurityConstants.USER_DELETE
+                SecurityConstants.USER_UPDATE, SecurityConstants.USER_DELETE,
+                SecurityConstants.ADMIN_CREATE, SecurityConstants.ADMIN_DELETE,
+                SecurityConstants.ADMIN_READ, SecurityConstants.ADMIN_UPDATE
         );
-        rolePermissions.put(SecurityConstants.ROLE_ADMIN, allPermissions);
 
-        // Manager has most permissions except user deletion and some admin functions
-        rolePermissions.put(SecurityConstants.ROLE_MANAGER, Arrays.asList(
-                SecurityConstants.USER_READ, SecurityConstants.USER_CREATE, SecurityConstants.USER_UPDATE
-        ));
+        rolePermissions.put(SecurityConstants.ROLE_ADMIN, allPermissions);
 
         // Regular user has basic read permissions and can create sites
         rolePermissions.put(SecurityConstants.ROLE_USER, Arrays.asList(

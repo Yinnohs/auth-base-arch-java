@@ -7,6 +7,7 @@ import com.yinnohs.security.jwt.auth.infrastructure.models.AccountModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class AccountMapper {
@@ -31,7 +32,7 @@ public class AccountMapper {
                 .password(new Password(account.getPassword()))
                 .refreshToken(account.getRefreshToken())
                 .userId(account.getUserId())
-                .role(account.getRole())
+                .role(roleMapper.modelToDomain(account.getRole()))
                 .build();
     }
 

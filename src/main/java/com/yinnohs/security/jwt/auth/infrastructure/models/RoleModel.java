@@ -1,8 +1,10 @@
 package com.yinnohs.security.jwt.auth.infrastructure.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +27,10 @@ public class RoleModel {
             inverseJoinColumns = @JoinColumn(name =  "permission_id")
     )
     Set<PermissionModel> permissions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AccountModel> accounts = new ArrayList<>();
 
     public  void  addPermission(PermissionModel permission){
         this.permissions.add(permission);

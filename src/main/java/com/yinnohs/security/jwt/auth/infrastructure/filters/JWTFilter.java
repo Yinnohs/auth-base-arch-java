@@ -47,6 +47,7 @@ public class JWTFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailsService.loadUserByUsername(accountEmail);
 
             boolean isValidToken = jwtService.validateToken(token, userDetails);
+            var authorities = userDetails.getAuthorities();
 
             if (isValidToken){
                 var userPasswordAuthToken = new UsernamePasswordAuthenticationToken(

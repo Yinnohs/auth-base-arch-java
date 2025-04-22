@@ -58,10 +58,9 @@ public class SecurityConfig {
                             .requestMatchers("/v3/api-docs/**").permitAll()
                             .requestMatchers("/api-docs/**").permitAll()
 
-
                             //admin section
                             .requestMatchers("/api/v1/admin/**")
-                            .hasRole(SecurityConstants.ROLE_ADMIN)
+                            .hasRole(SecurityConstants.ADMIN)
                             .requestMatchers(HttpMethod.GET, "/api/v1/admin/**", "/api/v1/users/hc")
                             .hasAuthority(SecurityConstants.ADMIN_READ)
                             .requestMatchers(HttpMethod.POST, "/api/v1/admin/**")
