@@ -1,6 +1,5 @@
 package com.yinnohs.security.jwt.auth.infrastructure.models;
 
-import com.yinnohs.security.jwt.auth.domain.entities.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,7 +32,7 @@ public class AccountModel implements UserDetails {
     private Long userId;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleModel role;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
@@ -72,9 +71,9 @@ public class AccountModel implements UserDetails {
     public List<SimpleGrantedAuthority> getUserAuthorities(){
         var authorities = new ArrayList<>(role.getPermissions()
                 .stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.name()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .toList());
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        authorities.add(new SimpleGrantedAuthority(role.getName()));
         return authorities;
     }
 

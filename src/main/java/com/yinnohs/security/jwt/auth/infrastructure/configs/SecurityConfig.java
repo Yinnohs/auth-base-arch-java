@@ -1,6 +1,6 @@
 package com.yinnohs.security.jwt.auth.infrastructure.configs;
 
-import com.yinnohs.security.jwt.auth.domain.entities.Role;
+import com.yinnohs.security.jwt.auth.domain.entities.SecurityConstants;
 import com.yinnohs.security.jwt.auth.infrastructure.filters.JWTFilter;
 import com.yinnohs.security.jwt.auth.infrastructure.services.UserDetailsAccountServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,6 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import static com.yinnohs.security.jwt.auth.domain.entities.Permissions.*;
 
 @Configuration
 @RequiredArgsConstructor
@@ -60,29 +58,18 @@ public class SecurityConfig {
                             .requestMatchers("/v3/api-docs/**").permitAll()
                             .requestMatchers("/api-docs/**").permitAll()
 
-                            //management section
-                            .requestMatchers("/api/v1/management/**")
-                            .hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                            .requestMatchers(HttpMethod.GET, "/api/v1/management/**")
-                            .hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
-                            .requestMatchers(HttpMethod.POST, "/api/v1/management/**")
-                            .hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
-                            .requestMatchers(HttpMethod.PUT, "/api/v1/management/**")
-                            .hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
-                            .requestMatchers(HttpMethod.DELETE, "/api/v1/management/**")
-                            .hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
 
                             //admin section
                             .requestMatchers("/api/v1/admin/**")
-                            .hasRole(Role.ADMIN.name())
+                            .hasRole(SecurityConstants.ROLE_ADMIN)
                             .requestMatchers(HttpMethod.GET, "/api/v1/admin/**", "/api/v1/users/hc")
-                            .hasAuthority(ADMIN_READ.name())
+                            .hasAuthority(SecurityConstants.ADMIN_READ)
                             .requestMatchers(HttpMethod.POST, "/api/v1/admin/**")
-                            .hasAuthority(ADMIN_CREATE.name())
+                            .hasAuthority(SecurityConstants.ADMIN_CREATE)
                             .requestMatchers(HttpMethod.PUT, "/api/v1/admin/**")
-                            .hasAuthority(ADMIN_UPDATE.name())
+                            .hasAuthority(SecurityConstants.ADMIN_UPDATE)
                             .requestMatchers(HttpMethod.DELETE, "/api/v1/admin/**")
-                            .hasAuthority(ADMIN_DELETE.name())
+                            .hasAuthority(SecurityConstants.ADMIN_DELETE)
 
 
                             //any request

@@ -20,5 +20,4 @@ public class Account {
     private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime lastUpdate;
-
 }
